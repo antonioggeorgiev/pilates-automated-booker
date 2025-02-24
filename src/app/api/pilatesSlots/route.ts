@@ -24,9 +24,13 @@ export async function GET(request: Request) {
 
     // Get the URL object from the request
     const { searchParams } = new URL(request.url);
+    const selectedDate = searchParams.get("start_at_date");
 
     // Combine default params with any additional params from the request
     const params = new URLSearchParams(defaultParams);
+    if (selectedDate) {
+      params.set("filter[start_at_date]", selectedDate);
+    }
     searchParams.forEach((value, key) => {
       params.set(key, value);
     });
@@ -53,7 +57,6 @@ export async function GET(request: Request) {
         `API responded with status: ${response.status}. Error: ${errorText}`,
       );
     }
-    // console.log(JSON.stringify(jsonData, null, 2).included, 11111);
     const pilatesSlots = PilatesSlotSchema.parse(await response.json());
 
     const parsedPilatesSlots = pilatesSlots.included

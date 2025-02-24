@@ -1,7 +1,6 @@
-import { DatePicker } from "~/components/ui/date-picker";
+import { PilatesHomePage } from "~/components/pilates-home-page/PilatesHomePage";
 import { auth } from "~/server/auth";
 import { api, HydrateClient } from "~/trpc/server";
-import PilatesList from "~/components/pilates-list/PilatesList";
 
 export default async function Home() {
   const session = await auth();
@@ -13,8 +12,7 @@ export default async function Home() {
   return (
     <HydrateClient>
       <main className="flex min-h-screen">
-        <DatePicker />
-        <PilatesList />
+        <PilatesHomePage />
       </main>
     </HydrateClient>
   );
