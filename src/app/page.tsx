@@ -1,4 +1,4 @@
-import { Calendar } from "~/components/ui/calendar";
+import { DatePicker } from "~/components/ui/date-picker";
 import { auth } from "~/server/auth";
 import { api, HydrateClient } from "~/trpc/server";
 
@@ -12,7 +12,7 @@ export default async function Home() {
   return (
     <HydrateClient>
       <main className="flex min-h-screen">
-        <Calendar />
+        <DatePicker />
       </main>
     </HydrateClient>
   );
