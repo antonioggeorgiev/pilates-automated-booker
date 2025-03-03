@@ -60,7 +60,7 @@ export async function GET(request: Request) {
     const pilatesSlots = PilatesSlotSchema.parse(await response.json());
 
     const parsedPilatesSlots = pilatesSlots.included
-      .filter(
+      ?.filter(
         (slot) =>
           slot.attributes.start_at &&
           slot.attributes.end_at &&
@@ -93,11 +93,7 @@ export async function GET(request: Request) {
           employeeId,
         } satisfies PilatesSlotsResponse;
       });
-    return NextResponse.json(parsedPilatesSlots);
-
-    // Comment out validation for now
-    // const data = PilatesSlotSchema.parse(jsonData);
-    // return NextResponse.json(data);
+    return NextResponse.json(parsedPilatesSlots ?? []);
   } catch (error) {
     console.error("Error fetching pilates slots:", error);
     return NextResponse.json(

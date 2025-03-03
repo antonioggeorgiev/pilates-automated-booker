@@ -1,0 +1,19 @@
+version: "3.8"
+services:
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydb
+    ports:
+      - "5432:5432"
+
+  prisma:
+    image: node:18
+    volumes:
+      - ./prisma:/app/prisma
+    working_dir: /app
+    command: sh -c "npm install -g prisma && prisma --help"
+    depends_on:
+      - db

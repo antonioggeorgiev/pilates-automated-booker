@@ -3,8 +3,8 @@ import { z } from "zod";
 const MetaPageSchema = z.object({
   "current-page": z.number(),
   "per-page": z.number(),
-  from: z.number(),
-  to: z.number(),
+  from: z.number().nullable(),
+  to: z.number().nullable(),
   total: z.number(),
   "last-page": z.number(),
 });
@@ -45,7 +45,7 @@ const PilatesIncludedSchema = z.object({
 });
 
 export const PilatesSlotSchema = z.object({
-  included: z.array(PilatesIncludedSchema),
+  included: z.array(PilatesIncludedSchema).optional(),
   meta: z.object({
     page: MetaPageSchema,
   }),
